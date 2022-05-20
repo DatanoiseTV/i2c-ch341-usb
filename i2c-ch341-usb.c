@@ -282,7 +282,7 @@ static int i2c_ch341_usb_probe(struct usb_interface *iface,
 
 	/* set ch341 i2c speed */
 	dev->out_buf[0] = CH341_CMD_I2C_STREAM;
-	dev->out_buf[1] = CH341_CMD_I2C_STM_SET | CH341_I2C_STANDARD_SPEED;
+	dev->out_buf[1] = CH341_CMD_I2C_STM_SET | CH341_I2C_LOW_SPEED;//CH341_I2C_STANDARD_SPEED;
 	dev->out_buf[2] = CH341_CMD_I2C_STM_END;
 	retval = ch341_xfer(dev, 3, 0);
 	if (retval < 0) {
