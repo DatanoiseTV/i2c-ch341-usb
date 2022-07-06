@@ -25,10 +25,10 @@
 
 #define DRV_VERSION "1.1"
 
-#define CH341_I2C_LOW_SPEED 0      // low speed - 20kHz
+#define CH341_I2C_LOW_SPEED 0	   // low speed - 20kHz
 #define CH341_I2C_STANDARD_SPEED 1 // standard speed - 100kHz
-#define CH341_I2C_FAST_SPEED 2     // fast speed - 400kHz
-#define CH341_I2C_HIGH_SPEED 3     // high speed - 750kHz
+#define CH341_I2C_FAST_SPEED 2	   // fast speed - 400kHz
+#define CH341_I2C_HIGH_SPEED 3	   // high speed - 750kHz
 
 #define CH341_CMD_I2C_STREAM 0xAA
 
@@ -42,7 +42,9 @@
 uint i2c_speed = 0;
 uint i2c_speed_desc[4] = {20, 100, 400, 750};
 
-MODULE_PARM_DESC(i2c_speed, "I2C Bus Speed. 0 = 20kHz, 1 = 100kHz, 2 = 400kHz, 3 = 750kHz");
+MODULE_PARM_DESC(
+	i2c_speed,
+	"I2C Bus Speed. 0 = 20kHz, 1 = 100kHz, 2 = 400kHz, 3 = 750kHz");
 
 /* Structure to hold all of our device specific stuff */
 struct i2c_ch341_usb {
@@ -286,7 +288,7 @@ static int i2c_ch341_usb_probe(struct usb_interface *iface,
 	i2c_add_adapter(&dev->adapter);
 
 	/* set ch341 i2c speed */
-        uint speed_opt = i2c_speed & 0b11; 
+	uint speed_opt = i2c_speed & 0b11;
 	dev->out_buf[0] = CH341_CMD_I2C_STREAM;
 	dev->out_buf[1] = CH341_CMD_I2C_STM_SET | speed_opt;
 	dev->out_buf[2] = CH341_CMD_I2C_STM_END;
@@ -296,7 +298,8 @@ static int i2c_ch341_usb_probe(struct usb_interface *iface,
 		retval = -EIO;
 		goto error;
 	}
-        dev_info(&dev->adapter.dev, "Set speed to %i kHz.", i2c_speed_desc[speed_opt]);
+	dev_info(&dev->adapter.dev, "Set speed to %i kHz.",
+		 i2c_speed_desc[speed_opt]);
 
 	dev_info(&dev->adapter.dev, "connected i2c-ch341-usb device\n");
 
