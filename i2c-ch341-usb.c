@@ -39,7 +39,7 @@
 #define CH341_CMD_I2C_STM_SET 0x60
 #define CH341_CMD_I2C_STM_END 0x00
 
-uint i2c_speed = 0;
+uint i2c_speed = 1;
 uint i2c_speed_desc[4] = {20, 100, 400, 750};
 
 MODULE_PARM_DESC(
